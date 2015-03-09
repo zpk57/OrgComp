@@ -8,7 +8,7 @@
 #define TIM_7_PREDIV		(uint32_t)0x1F40
 #define TIM_7_COUNTER		(uint32_t)0x3E8
 
-uint8_t stringPointer[] = "Time xx:xx";
+uint8_t stringPointer[] = "Time xx:xx\n";
 uint8_t sec, min;
 
 void TIM7_IRQHandler(void)
@@ -35,7 +35,7 @@ void TIM7_IRQHandler(void)
 	}
 
 	GreenHighLedChangeState();
-	TransmitBufferStart(10, stringPointer);
+	TransmitBufferStart(11, stringPointer);
 }
 
 int main(void)
