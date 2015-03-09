@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -g2 -Wall -O0 -c -DSTM32F303RC -DSTM32F30X -I..\..\..\..\..\..\..\Desktop\Lab_1\cmsis -I..\..\..\..\..\..\..\Desktop -I..\..\..\..\..\..\.. -I..\..\..\..\..\..\..\Desktop\Lab_1 -I..\..\..\..\..\..\..\Desktop\Lab_1\cmsis_boot">
+      <target file="startup_stm32f30x.o" lastModified="14bff261541">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f30x.S" lastModified="14bfaeac990"/>
+      </target>
+      <target file="UART_control.o" lastModified="14bff26146c">
+         <source file="..\..\..\UART_control.c" lastModified="14bfe550640"/>
+      </target>
+      <target file="system_stm32f30x_temp.o" lastModified="14bff261521">
+         <source file="..\..\..\cmsis_boot\system_stm32f30x_temp.c" lastModified="14bfaeac990"/>
+      </target>
+      <target file="delay.o" lastModified="14bff261400">
+         <source file="..\..\..\delay.c" lastModified="144a8745480"/>
+      </target>
+      <target file="main.o" lastModified="14bff2614cb">
+         <source file="..\..\..\main.c" lastModified="14bff25fe01"/>
+      </target>
+      <target file="led_blink.o" lastModified="14bff2613b7">
+         <source file="..\..\..\led_blink.c" lastModified="14bfe5bad60"/>
+      </target>
+   </processor>
+</history>

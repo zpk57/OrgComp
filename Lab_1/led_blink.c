@@ -1,0 +1,112 @@
+#include "led_blink.h"
+
+void ledInit(void)
+{
+	RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
+	RCC->AHBENR |= RCC_AHBENR_GPIOFEN;
+	RCC->AHBENR |= RCC_AHBENR_GPIOEEN;
+
+	GPIOC->MODER &= ~(	GPIO_MODER_MODER0 |
+						GPIO_MODER_MODER1 |
+						GPIO_MODER_MODER2 |
+						GPIO_MODER_MODER3);
+	GPIOC->MODER |= (	GPIO_MODER_MODER0_0|
+						GPIO_MODER_MODER1_0|
+						GPIO_MODER_MODER2_0|
+						GPIO_MODER_MODER3_0);
+	GPIOC->OTYPER &= ~(	GPIO_OTYPER_OT_0|
+						GPIO_OTYPER_OT_1|
+						GPIO_OTYPER_OT_2|
+						GPIO_OTYPER_OT_3);
+	GPIOC->OSPEEDR |= (	GPIO_OSPEEDER_OSPEEDR0 |
+						GPIO_OSPEEDER_OSPEEDR1 |
+						GPIO_OSPEEDER_OSPEEDR2 |
+						GPIO_OSPEEDER_OSPEEDR3 );
+	GPIOC->PUPDR &= ~(	GPIO_PUPDR_PUPDR0 |
+						GPIO_PUPDR_PUPDR1 |
+						GPIO_PUPDR_PUPDR2 |
+						GPIO_PUPDR_PUPDR3 );
+
+	GPIOF->MODER &= ~GPIO_MODER_MODER2;
+	GPIOF->MODER |= GPIO_MODER_MODER2_0;
+	GPIOF->OTYPER &= ~GPIO_OTYPER_OT_2;
+	GPIOF->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR2;
+	GPIOF->PUPDR &= ~GPIO_PUPDR_PUPDR2;
+
+	GPIOE->MODER &= ~GPIO_MODER_MODER6;
+	GPIOE->MODER |= GPIO_MODER_MODER6_0;
+	GPIOE->OTYPER &= ~GPIO_OTYPER_OT_6;
+	GPIOE->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR6;
+	GPIOE->PUPDR &= ~GPIO_PUPDR_PUPDR6;
+}
+
+void RedLedOn(void)
+{
+	GPIOC->BSRR = GPIO_BSRR_BS_3;
+}
+
+void BlueLedOn(void)
+{
+	GPIOF->BSRR = GPIO_BSRR_BS_2;
+}
+
+void YellowLedOn(void)
+{
+	GPIOC->BSRR = GPIO_BSRR_BS_1;
+}
+
+void WhiteLedOn(void)
+{
+	GPIOC->BSRR = GPIO_BSRR_BS_0;
+}
+
+void GreenHighLedOn(void)
+{
+	GPIOE->BSRR = GPIO_BSRR_BS_6;
+}
+
+void GreenLowLedOn(void)
+{
+	GPIOC->BSRR = GPIO_BSRR_BS_2;
+}
+
+void RedLedOff(void)
+{
+	GPIOC->BSRR = GPIO_BSRR_BR_3;
+}
+
+void BlueLedOff(void)
+{
+	GPIOF->BSRR = GPIO_BSRR_BR_2;
+}
+
+void YellowLedOff(void)
+{
+	GPIOC->BSRR = GPIO_BSRR_BR_1;
+}
+
+void WhiteLedOff(void)
+{
+	GPIOC->BSRR = GPIO_BSRR_BR_0;
+}
+
+void GreenHighLedOff(void)
+{
+	GPIOE->BSRR = GPIO_BSRR_BR_6;
+}
+
+void GreenLowLedOff(void)
+{
+	GPIOC->BSRR = GPIO_BSRR_BR_2;
+}
+
+void GreenHighLedChangeState(void)
+{
+	GPIOE->ODR ^= GPIO_ODR_6;
+}
+
+void RedLedChangeState(void)
+{
+	GPIOC->ODR ^= GPIO_ODR_3;
+}
+

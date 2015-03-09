@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="4.9.3 -mcpu=cortex-m4 -mthumb -g2 -nostartfiles -Map=Lab_1_inst_0.map -O0 --gc-sections -LC:\Users\Petr\AppData\Roaming\CooCox\CoIDE\configuration\ProgramData\Lab_1_inst_0 -TC:\Users\Petr\AppData\Roaming\CooCox\CoIDE\configuration\ProgramData\Lab_1_inst_0/arm-gcc-link.ld -g">
+      <target file="Lab_1_inst_0.elf" lastModified="14bff26171f">
+         <source file="..\obj\startup_stm32f30x.o" lastModified="14bff261541"/>
+         <source file="..\obj\system_stm32f30x_temp.o" lastModified="14bff261521"/>
+         <source file="..\obj\led_blink.o" lastModified="14bff2613b7"/>
+         <source file="..\obj\delay.o" lastModified="14bff261400"/>
+         <source file="..\obj\main.o" lastModified="14bff2614cb"/>
+         <source file="..\obj\UART_control.o" lastModified="14bff26146c"/>
+      </target>
+   </processor>
+</history>
