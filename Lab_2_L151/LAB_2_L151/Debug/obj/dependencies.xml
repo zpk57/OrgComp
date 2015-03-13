@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dependencies>
+   <includePath signature="/IT:\Учёба\3_2_Организация_эвм\DONE\L2_REP\Lab_2_L151 /IT:\Учёба\3_2_Организация_эвм\DONE\L2_REP\Lab_2_L151\cmsis_boot /IT:\Учёба\3_2_Организация_эвм\DONE\L2_REP\Lab_2_L151\cmsis /IT:\Учёба\3_2_Организация_эвм\DONE /IT:\Учёба\3_2_Организация_эвм\DONE\L2_REP">
+      <source file="..\..\..\cmsis_boot\stm32l1xx.h" lastModified="14c14319dae">
+         <include file="..\..\..\cmsis\core_cm3.h"/>
+         <include file="..\..\..\cmsis_boot\system_stm32l1xx.h"/>
+      </source>
+      <source file="..\..\..\ExtInerruptControl.c" lastModified="14c14addc41">
+         <include file="..\..\..\ExtInerruptControl.h"/>
+      </source>
+      <source file="..\..\..\types_P.h" lastModified="14b3752af8e">
+      </source>
+      <source file="..\..\..\cmsis\core_cmFunc.h" lastModified="14c14319dea">
+      </source>
+      <source file="..\..\..\cmsis\core_cmInstr.h" lastModified="14c14319dea">
+      </source>
+      <source file="..\..\..\cmsis\core_cm3.h" lastModified="14c143199f8">
+         <include file="..\..\..\cmsis\core_cmInstr.h"/>
+         <include file="..\..\..\cmsis\core_cmFunc.h"/>
+      </source>
+      <source file="..\..\..\UART_control.h" lastModified="14c144fa436">
+         <include file="..\..\..\cmsis_boot\stm32l1xx.h"/>
+         <include file="..\..\..\types_P.h"/>
+      </source>
+      <source file="..\..\..\delay.h" lastModified="14c14a060a9">
+         <include file="..\..\..\cmsis_boot\stm32l1xx.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\Startup\startup_stm32l1xx_md.c" lastModified="14c143195de">
+      </source>
+      <source file="..\..\..\UART_control.c" lastModified="14c149b62c9">
+         <include file="..\..\..\UART_control.h"/>
+      </source>
+      <source file="..\..\..\delay.c" lastModified="14bff40332b">
+         <include file="..\..\..\delay.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32l1xx.h" lastModified="14c14319606">
+      </source>
+      <source file="..\..\..\ExtInerruptControl.h" lastModified="14c14addc4c">
+         <include file="..\..\..\cmsis_boot\stm32l1xx.h"/>
+         <include file="..\..\..\types_P.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32l1xx.c" lastModified="14c14a060bc">
+         <include file="..\..\..\cmsis_boot\stm32l1xx.h"/>
+      </source>
+   </includePath>
+</dependencies>
