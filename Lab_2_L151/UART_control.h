@@ -6,7 +6,7 @@
 
 #define ALTER_FUNC_7 0x77777777
 
-#define MAX_TRANSMIT_BUFF_SIZE 30
+#define MAX_TRANSMIT_BUFF_SIZE 50
 
 
 //		asm volatile ("" ::: "memory");
