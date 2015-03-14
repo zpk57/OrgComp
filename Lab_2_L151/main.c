@@ -64,16 +64,16 @@ void build_message(void)
 	result_message[17] = '0' + last_pulse/10 % 10;
 	result_message[18] = '0' + last_pulse % 10;
 
-	result_message[29] = '0' + last_pulse/1000000000 % 10;
-	result_message[30] = '0' + last_pulse/100000000 % 10;
-	result_message[31] = '0' + last_pulse/10000000 % 10;
-	result_message[32] = '0' + last_pulse/1000000 % 10;
-	result_message[33] = '0' + last_pulse/100000 % 10;
-	result_message[34] = '0' + last_pulse/10000 % 10;
-	result_message[35] = '0' + last_pulse/1000 % 10;
-	result_message[36] = '0' + last_pulse/100 % 10;
-	result_message[37] = '0' + last_pulse/10 % 10;
-	result_message[38] = '0' + last_pulse % 10;
+	result_message[29] = '0' + last_positive/1000000000 % 10;
+	result_message[30] = '0' + last_positive/100000000 % 10;
+	result_message[31] = '0' + last_positive/10000000 % 10;
+	result_message[32] = '0' + last_positive/1000000 % 10;
+	result_message[33] = '0' + last_positive/100000 % 10;
+	result_message[34] = '0' + last_positive/10000 % 10;
+	result_message[35] = '0' + last_positive/1000 % 10;
+	result_message[36] = '0' + last_positive/100 % 10;
+	result_message[37] = '0' + last_positive/10 % 10;
+	result_message[38] = '0' + last_positive % 10;
 }
 
 void RisePA12(void)
