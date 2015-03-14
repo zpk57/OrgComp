@@ -81,9 +81,11 @@ void RisePA12(void)
 	uint32_t cnt = TIM6->CNT;
 	TIM6->CNT = 0;	//clear cnt
 	last_pulse = cnt + (irq_cnt << 16);
-
-	build_message();
-	TransmitBufferStart(40, result_message);
+	if(last_pulse > 10000)
+	{
+		build_message();
+		TransmitBufferStart(40, result_message);
+	}
 
 	irq_cnt = 0;	//clear interrupt counter
 }
