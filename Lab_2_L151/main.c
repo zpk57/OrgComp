@@ -53,27 +53,27 @@ void TIM6_IRQHandler(void)
 
 void build_message(void)
 {
-	result_message[9]  = last_pulse/1000000000 % 10;
-	result_message[10] = last_pulse/100000000 % 10;
-	result_message[11] = last_pulse/10000000 % 10;
-	result_message[12] = last_pulse/1000000 % 10;
-	result_message[13] = last_pulse/100000 % 10;
-	result_message[14] = last_pulse/10000 % 10;
-	result_message[15] = last_pulse/1000 % 10;
-	result_message[16] = last_pulse/100 % 10;
-	result_message[17] = last_pulse/10 % 10;
-	result_message[18] = last_pulse % 10;
+	result_message[9]  = '0' + last_pulse/1000000000 % 10;
+	result_message[10] = '0' + last_pulse/100000000 % 10;
+	result_message[11] = '0' + last_pulse/10000000 % 10;
+	result_message[12] = '0' + last_pulse/1000000 % 10;
+	result_message[13] = '0' + last_pulse/100000 % 10;
+	result_message[14] = '0' + last_pulse/10000 % 10;
+	result_message[15] = '0' + last_pulse/1000 % 10;
+	result_message[16] = '0' + last_pulse/100 % 10;
+	result_message[17] = '0' + last_pulse/10 % 10;
+	result_message[18] = '0' + last_pulse % 10;
 
-	result_message[29]  = last_pulse/1000000000 % 10;
-	result_message[30] = last_pulse/100000000 % 10;
-	result_message[31] = last_pulse/10000000 % 10;
-	result_message[32] = last_pulse/1000000 % 10;
-	result_message[33] = last_pulse/100000 % 10;
-	result_message[34] = last_pulse/10000 % 10;
-	result_message[35] = last_pulse/1000 % 10;
-	result_message[36] = last_pulse/100 % 10;
-	result_message[37] = last_pulse/10 % 10;
-	result_message[38] = last_pulse % 10;
+	result_message[29] = '0' + last_pulse/1000000000 % 10;
+	result_message[30] = '0' + last_pulse/100000000 % 10;
+	result_message[31] = '0' + last_pulse/10000000 % 10;
+	result_message[32] = '0' + last_pulse/1000000 % 10;
+	result_message[33] = '0' + last_pulse/100000 % 10;
+	result_message[34] = '0' + last_pulse/10000 % 10;
+	result_message[35] = '0' + last_pulse/1000 % 10;
+	result_message[36] = '0' + last_pulse/100 % 10;
+	result_message[37] = '0' + last_pulse/10 % 10;
+	result_message[38] = '0' + last_pulse % 10;
 }
 
 void RisePA12(void)
