@@ -5,7 +5,7 @@
 #include "ExtInerruptControl.h"
 
 uint32_t last_pulse, last_positive, irq_cnt;
-uint8_t result_message[] = "Period = 0000000000; Hight = 0000000000\n";
+uint8_t result_message[40];
 
 void LedInit(void)
 {
@@ -101,6 +101,27 @@ int main(void)
 	UART1_Init();
 	InitInerruptPA12();
 	Tim6Init();
+
+	result_message[0] = 'P';
+	result_message[1] = 'e';
+	result_message[2] = 'r';
+	result_message[3] = 'i';
+	result_message[4] = 'o';
+	result_message[5] = 'd';
+	result_message[6] = ' ';
+	result_message[7] = '=';
+	result_message[8] = ' ';
+	result_message[19] = ';';
+	result_message[20] = ' ';
+	result_message[21] = 'H';
+	result_message[22] = 'i';
+	result_message[23] = 'g';
+	result_message[24] = 'h';
+	result_message[25] = 't';
+	result_message[26] = ' ';
+	result_message[27] = '=';
+	result_message[28] = ' ';
+	result_message[39] = '\n';
 
     while(1)
     {
