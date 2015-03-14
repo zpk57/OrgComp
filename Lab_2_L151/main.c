@@ -17,6 +17,36 @@ void LedInit(void)
 }
 
 
+void Tim6Init(void)
+{
+	RCC->APB1ENR |= RCC_APB1ENR_TIM6EN;
+	//Update enable (UDIS == 0)
+	//TIM6->CR1 &= ~TIM_CR1_UDIS;
+	//clear to reset value
+	TIM6->CR2 = 0;
+	//set prescaller
+	TIM6->PSC = 0x1061;
+	//set limit
+	TIM6->ARR = 0x3E8;
+	//enable interrupt, disable DMA request
+	TIM6->DIER = TIM_DIER_UIE & (~TIM_DIER_UDE);
+
+	NVIC_SetPriority (TIM6_IRQn, 3);
+	NVIC_EnableIRQ (TIM6_IRQn);
+
+	//enable TIM6
+	TIM6->CR1 |= TIM_CR1_CEN;
+}
+
+void TIM6_IRQHandler(void)
+{
+	//clear UIF
+	TIM6->SR &= ~TIM_SR_UIF;
+
+	//Do smth
+	//Tim6InterruptRoutine();
+}
+
 //Place your code here
 
 /*
@@ -36,6 +66,7 @@ int main(void)
 	LedInit();
 	UART1_Init();
 	InitInerruptPA12();
+	Tim6Init();
 
     while(1)
     {
