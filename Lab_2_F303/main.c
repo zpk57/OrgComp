@@ -10,7 +10,7 @@ int main(void)
 
     while(1)
     {
-    	Delay(800000);	//100ms
+    	Delay(80000);	//100ms
     	GreenHighLedChangeState();
     }
 }
