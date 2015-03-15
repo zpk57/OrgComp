@@ -166,6 +166,38 @@ ErrorStateEnum TransmitBufferStart(uint32_t stringLengh, uint8_t * strPointer)
 	return retStatus;
 }
 
+/**
+ * @param  stringLengh	String length without binary data.
+ * @param  strPointer   String pointer.
+ */
+ErrorStateEnum TransmitBinaryBufferStart(uint32_t stringLengh, uint8_t * strPointer)
+{
+	ErrorStateEnum retStatus = SUCCESS_P;
+	uint32_t i;
+	transmitPointer = 0;
+	if(stringLengh > MAX_TRANSMIT_BUFF_SIZE)
+	{
+		retStatus = ERROR_P;
+		dataToSend = MAX_TRANSMIT_BUFF_SIZE;
+		for(i = 0; i < MAX_TRANSMIT_BUFF_SIZE; i++)
+		{
+			outBuff[i] = (uint8_t)*(strPointer + i);
+		}
+	}
+	else
+	{
+		dataToSend = stringLengh;
+		for(i = 0; i < dataToSend; i++)
+		{
+			outBuff[i] = (uint8_t)*(strPointer + i);
+		}
+	}
+	TransmitBufferInterruptRoutine();
+	//enable USART1 interrupt
+	USART1->CR1 |=  USART_CR1_TXEIE;
+	return retStatus;
+}
+
 void TransmitBufferErrase(void)
 {
 	uint32_t i;

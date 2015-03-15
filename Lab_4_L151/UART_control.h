@@ -14,6 +14,7 @@
 
 ErrorStateEnum UART1_Init(void);
 ErrorStateEnum TransmitBufferStart(uint32_t stringLengh, uint8_t * strPointer);
+ErrorStateEnum TransmitBinaryBufferStart(uint32_t stringLengh, uint8_t * strPointer);
 void TransmitBufferInterruptRoutine(void);
 void RecieveBufferInterruptRoutine(void);
 void TransmitBufferErrase(void);

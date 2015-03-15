@@ -4,6 +4,8 @@
 #include "delay.h"
 #include "ADC_control.h"
 
+uint8_t buff[5];
+
 void LedInit(void)
 {
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
@@ -18,11 +20,12 @@ void LedInit(void)
 
 void AdcEndOfConversationRoutine(uint32_t result)
 {
-	uint8_t buff[3];
-	buff[1] = (uint8_t)((result >> 8) & 0xFF);
-	buff[0] = (uint8_t)(result & 0xFF);
-	buff[2] = '\n';
-	TransmitBufferStart(3, buff);
+	buff[0] = '=';
+	buff[1] = ' ';
+	buff[2] = (uint8_t)((result >> 8) & 0xFF);
+	buff[3] = (uint8_t)(result & 0xFF);
+	buff[4] = '\n';
+	TransmitBinaryBufferStart(5, buff);
 }
 
 int main(void)
