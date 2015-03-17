@@ -56,7 +56,7 @@ void AdcEndOfConversationRoutine(uint32_t result)
 	}
 	else
 	{
-		buff[0] = (uint8_t)(result & (uint32_t)0xFF);
+		buff[0] = (uint8_t)((result >> 4) & (uint32_t)0xFF);
 		TransmitBinaryBufferStart(1, buff);
 	}
 }
