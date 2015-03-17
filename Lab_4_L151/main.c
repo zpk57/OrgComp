@@ -4,7 +4,9 @@
 #include "delay.h"
 #include "ADC_control.h"
 
-uint8_t buff[5];
+uint8_t buff[15];
+
+extern volatile uint32_t inBuff;
 
 void LedInit(void)
 {
@@ -18,6 +20,7 @@ void LedInit(void)
 	GPIOA->PUPDR &= ~GPIO_PUPDR_PUPDR1;
 }
 
+/*
 void AdcEndOfConversationRoutine(uint32_t result)
 {
 	buff[0] = '=';
@@ -27,15 +30,45 @@ void AdcEndOfConversationRoutine(uint32_t result)
 	buff[4] = '\n';
 	TransmitBinaryBufferStart(5, buff);
 }
+*/
 
+void AdcEndOfConversationRoutine(uint32_t result)
+{
+	//select output data style: binary or text
+	if(inBuff < (uint32_t)0x0000FFFF)
+	{
+		buff[0] = 'V';
+		buff[1] = 'a';
+		buff[2] = 'l';
+		buff[3] = 'u';
+		buff[4] = 'e';
+		buff[5] = ' ';
+		buff[6] = '=';
+		buff[7] = ' ';
+		buff[8] =  '0' + result/10000 % 10;
+		buff[9] =  '0' + result/1000 % 10;
+		buff[10] = '0' + result/100 % 10;
+		buff[11] = '0' + result/10 % 10;
+		buff[12] = '0' + result % 10;
+		buff[13] = '\n';
+		buff[14] = '\0';
+		TransmitBufferStart(14, buff);
+	}
+	else
+	{
+		buff[0] = (uint8_t)(result & (uint32_t)0xFF);
+		TransmitBinaryBufferStart(1, buff);
+	}
+}
 int main(void)
 {
+	inBuff = (uint32_t)0;
 	UART1_Init();
 	ADC_Init();
 
     while(1)
     {
     	ADC_StartConversation();
-    	Delay(5000000);
+    	Delay(2000000);
     }
 }
