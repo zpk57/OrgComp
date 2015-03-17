@@ -35,7 +35,7 @@ void AdcEndOfConversationRoutine(uint32_t result)
 void AdcEndOfConversationRoutine(uint32_t result)
 {
 	//select output data style: binary or text
-	if(inBuff < (uint32_t)0x0000FFFF)
+	if(inBuff < (uint32_t)0x0000000F)
 	{
 		buff[0] = 'V';
 		buff[1] = 'a';
