@@ -5,7 +5,9 @@
 #include "ExtInerruptControl.h"
 
 uint32_t last_pulse, last_positive, irq_cnt;
-uint8_t result_message[40];
+uint32_t received_message;
+uint8_t result_message[30];
+uint8_t received_bits;
 
 void LedInit(void)
 {
@@ -53,27 +55,15 @@ void TIM6_IRQHandler(void)
 
 void build_message(void)
 {
-	result_message[9]  = '0' + last_pulse/1000000000 % 10;
-	result_message[10] = '0' + last_pulse/100000000 % 10;
-	result_message[11] = '0' + last_pulse/10000000 % 10;
-	result_message[12] = '0' + last_pulse/1000000 % 10;
-	result_message[13] = '0' + last_pulse/100000 % 10;
-	result_message[14] = '0' + last_pulse/10000 % 10;
-	result_message[15] = '0' + last_pulse/1000 % 10;
-	result_message[16] = '0' + last_pulse/100 % 10;
-	result_message[17] = '0' + last_pulse/10 % 10;
-	result_message[18] = '0' + last_pulse % 10;
 
-	result_message[29] = '0' + last_positive/1000000000 % 10;
-	result_message[30] = '0' + last_positive/100000000 % 10;
-	result_message[31] = '0' + last_positive/10000000 % 10;
-	result_message[32] = '0' + last_positive/1000000 % 10;
-	result_message[33] = '0' + last_positive/100000 % 10;
-	result_message[34] = '0' + last_positive/10000 % 10;
-	result_message[35] = '0' + last_positive/1000 % 10;
-	result_message[36] = '0' + last_positive/100 % 10;
-	result_message[37] = '0' + last_positive/10 % 10;
-	result_message[38] = '0' + last_positive % 10;
+	result_message[14] = '0' + ((received_message >> 7) & 1);
+	result_message[15] = '0' + ((received_message >> 6) & 1);
+	result_message[16] = '0' + ((received_message >> 5) & 1);
+	result_message[17] = '0' + ((received_message >> 4) & 1);
+	result_message[18] = '0' + ((received_message >> 3) & 1);
+	result_message[19] = '0' + ((received_message >> 2) & 1);
+	result_message[20] = '0' + ((received_message >> 1) & 1);
+	result_message[21] = '0' + ((received_message >> 0) & 1);
 }
 
 void RisePA12(void)
@@ -81,13 +71,25 @@ void RisePA12(void)
 	uint32_t cnt = TIM6->CNT;
 	TIM6->CNT = 0;	//clear cnt
 	last_pulse = cnt + (irq_cnt << 16);
-	if(last_pulse > 10000)
+	irq_cnt = 0;	//clear interrupt counter
+	received_bits++;
+
+	received_message = received_message << 1;
+	if(last_positive > 5000)
+	{
+		received_message &= ~((uint32_t)0x1);
+	}
+	else
+	{
+		received_message |= 1;
+	}
+
+	if(received_bits >= 8)
 	{
 		build_message();
 		TransmitBufferStart(40, result_message);
 	}
 
-	irq_cnt = 0;	//clear interrupt counter
 }
 
 void FallPA12(void)
@@ -102,26 +104,25 @@ int main(void)
 	InitInerruptPA12();
 	Tim6Init();
 
-	result_message[0] = 'P';
-	result_message[1] = 'e';
-	result_message[2] = 'r';
-	result_message[3] = 'i';
-	result_message[4] = 'o';
-	result_message[5] = 'd';
-	result_message[6] = ' ';
-	result_message[7] = '=';
-	result_message[8] = ' ';
-	result_message[19] = ';';
-	result_message[20] = ' ';
-	result_message[21] = 'H';
-	result_message[22] = 'i';
-	result_message[23] = 'g';
-	result_message[24] = 'h';
-	result_message[25] = 't';
-	result_message[26] = ' ';
-	result_message[27] = '=';
-	result_message[28] = ' ';
-	result_message[39] = '\n';
+	result_message[0] = 'L';
+	result_message[1] = 'a';
+	result_message[2] = 's';
+	result_message[3] = 't';
+	result_message[4] = ' ';
+	result_message[5] = 'm';
+	result_message[6] = 'e';
+	result_message[7] = 's';
+	result_message[8] = 's';
+	result_message[9] = 'a';
+	result_message[10] = 'g';
+	result_message[11] = 'e';
+	result_message[12] = ':';
+	result_message[13] = ' ';
+
+	result_message[22] = '\n';
+
+	received_message = 0;
+	received_bits = 0;
 
     while(1)
     {
