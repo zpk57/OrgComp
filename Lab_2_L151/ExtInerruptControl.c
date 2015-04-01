@@ -47,7 +47,7 @@ void EXTI15_10_IRQHandler(void)
 		EXTI->PR = 0x00ffffff;
 	}
 }
-
+/*
 
 void __attribute__ ((weak)) RisePA12(void)
 {
@@ -59,4 +59,4 @@ void __attribute__ ((weak)) FallPA12(void)
 {
 	//led off
 	GPIOA->BSRRH = GPIO_BSRR_BS_1;
-}
+}*/

@@ -1,5 +1,9 @@
 #include "ExtInerruptControl.h"
 
+void __attribute__ ((weak)) RisePA12(void);
+
+void __attribute__ ((weak)) FallPA12(void);
+
 void InitInerruptPA12(void)
 {
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
@@ -7,8 +11,8 @@ void InitInerruptPA12(void)
 	GPIOA->MODER &= ~GPIO_MODER_MODER12;
 
 	GPIOA->PUPDR &= ~GPIO_PUPDR_PUPDR12;
-	//pull-up
-	GPIOA->PUPDR |= GPIO_PUPDR_PUPDR12_0;
+	//pull-down
+	GPIOA->PUPDR |= GPIO_PUPDR_PUPDR12_1;
 
 	//interrupt mask register
 	EXTI->IMR |= EXTI_IMR_MR12;

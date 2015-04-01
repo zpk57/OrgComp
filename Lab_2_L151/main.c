@@ -7,6 +7,10 @@
 uint32_t last_pulse, last_positive, irq_cnt;
 uint8_t result_message[40];
 
+void RisePA12(void);
+
+void FallPA12(void);
+
 void LedInit(void)
 {
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;

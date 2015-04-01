@@ -6,8 +6,4 @@
 
 void InitInerruptPA12(void);
 
-void __attribute__ ((weak)) RisePA12(void);
-
-void __attribute__ ((weak)) FallPA12(void);
-
 #endif

@@ -17,12 +17,12 @@ uint8_t message;
 uint8_t pointer;
 
 
-void transmited_bit_init()
+uint8_t transmited_bit_init()
 {
 	if(pointer > 7)
 	{
 		TIM7->CR1 &= ~ TIM_CR1_CEN;
-		return;
+		return FALSE_P;
 	}
 
 	if((message >> pointer) & 0b1)
@@ -36,6 +36,7 @@ void transmited_bit_init()
 		current_low = SIG_LOW_0;
 	}
 	pointer++;
+	return TRUE_P;
 }
 
 void TIM7_IRQHandler(void)
@@ -50,9 +51,11 @@ void TIM7_IRQHandler(void)
 	}
 	else
 	{
-		transmited_bit_init();
-		TIM7->ARR = current_hight;
-		GreenHighLedOn();
+		if(transmited_bit_init())
+		{
+			TIM7->ARR = current_hight;
+			GreenHighLedOn();
+		}
 	}
 }
 

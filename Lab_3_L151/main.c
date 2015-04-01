@@ -6,7 +6,7 @@
 
 uint32_t last_pulse, last_positive, irq_cnt;
 uint32_t received_message;
-uint8_t result_message[30];
+uint8_t result_message[40];
 uint8_t received_bits;
 
 void LedInit(void)
@@ -50,7 +50,7 @@ void TIM6_IRQHandler(void)
 	//clear UIF
 	TIM6->SR &= ~TIM_SR_UIF;
 
-	irq_cnt++;
+	received_bits = 0;
 }
 
 void build_message(void)
@@ -72,29 +72,31 @@ void RisePA12(void)
 	TIM6->CNT = 0;	//clear cnt
 	last_pulse = cnt + (irq_cnt << 16);
 	irq_cnt = 0;	//clear interrupt counter
-	received_bits++;
-
-	received_message = received_message << 1;
-	if(last_positive > 5000)
-	{
-		received_message &= ~((uint32_t)0x1);
-	}
-	else
-	{
-		received_message |= 1;
-	}
-
-	if(received_bits >= 8)
-	{
-		build_message();
-		TransmitBufferStart(40, result_message);
-	}
-
 }
 
 void FallPA12(void)
 {
 	last_positive = TIM6->CNT + (irq_cnt << 16);
+
+	received_bits++;
+
+	received_message = received_message >> 1;
+
+	if(last_positive > 5000)
+	{
+		received_message &= ~((uint32_t)0b10000000);
+	}
+	else
+	{
+		received_message |= 0b10000000;
+	}
+
+	if(received_bits >= 8)
+	{
+		received_bits = 0;
+		build_message();
+		TransmitBufferStart(23, result_message);
+	}
 }
 
 int main(void)
